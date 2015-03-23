@@ -18,5 +18,11 @@ export default Ember.ArrayController.extend({
 
       todo.save();
     }
-  }
+  },
+  remaining: function () {
+    return this.filterBy('isCompleted', false).get('length');
+  }.property('@each.isCompleted'),
+  inflection: function () {
+    return this.get('remaining') === 1 ? 'item' : 'items';
+  }.property('remaining')
 });
